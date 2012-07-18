@@ -1,29 +1,8 @@
-/*
- RESTduino
- 
- A REST-style interface to the Arduino via the 
- Wiznet Ethernet shield.
- 
- Based on David A. Mellis's "Web Server" ethernet
- shield example sketch.
- 
- Circuit:
- * Ethernet shield attached to pins 10, 11, 12, 13
- 
- created 04/12/2011
- by Jason J. Gullickson
- 
- added 10/16/2011
- by Edward M. Goldberg - Optional Debug flag
- 
- */
-
-
 
 #include <SPI.h>
 #include <Ethernet.h>
 
-
+//THESE NEED TO GET UPDATED, CURRENT CONFIGURATION IS DIFFERENT
 #define RED_PIN 9
 #define GREEN_PIN 7
 #define YELLOW_PIN 8
