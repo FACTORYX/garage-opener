@@ -1,13 +1,12 @@
-
 #include <SPI.h>
 #include <Ethernet.h>
 
-//THESE NEED TO GET UPDATED, CURRENT CONFIGURATION IS DIFFERENT
+//CONFIGURATION IS UP TO DATE
 #define RED_PIN 9
-#define GREEN_PIN 7
-#define YELLOW_PIN 8
-#define RELAY_PIN 2
-#define SWITCH_PIN 5
+#define GREEN_PIN 8
+#define YELLOW_PIN 7
+#define RELAY_PIN 5
+#define SWITCH_PIN 6
 
 bool red_state = false;
 bool yellow_state = false;
