@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title>garage test</title>
+        
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+    
+  </head>
+  <body>
+    
+    <script>
+  
+      
+      function trigger() {
+          socket.send('T');
+
+      }
+      
+      function status() {
+          socket.send('S');
+
+      }
+      
+      var socket = io.connect();
+      socket.on('message', function(msg){
+	    if (msg.indexOf("CLOSED") > -1)
+		{
+			jQuery("button", ".trigger").css('background-color','green');
+		}
+		if (msg.indexOf("OPEN") > -1)
+		{
+			jQuery("button", ".trigger").css('background-color','red');
+		}	
+		console.log(msg);
+
+	});
+      
+
+	$(function() {
+		$( "button", ".trigger" ).button();
+		$( "button", ".trigger" ).click(function() { trigger(); });
+	});
+	</script>
+
+
+
+<div class="trigger">
+<button>TRIGGER</button>
+</div>
+
+
+
+</body>
+</html>
