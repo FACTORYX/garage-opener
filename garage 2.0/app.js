@@ -1,3 +1,7 @@
+//this app.js will run on the 711 Scott network locally
+//it will connected to the arduino via a tcp socket
+//it will connect to the external world via a socket.io, port opened on network
+
 var http = require('http')
   , net = require('net')
   , url = require('url')
@@ -5,7 +9,7 @@ var http = require('http')
   , sys = require(process.binding('natives').util ? 'util' : 'sys')
   , server;
 
-var tcpGuests = [];
+var tcpGuest = null;
 var mementoTCP = null;
 var MEMENTO_SITE_PORT;
 var MEMENTO_SITE_HOST;
@@ -79,16 +83,19 @@ var connectToMemento = function(timeout) {
     setTimeout(doConnect, timeout);
 };
 
+//create tcp socket server on 1337
 var tcpServer = net.createServer(function (tcpSocket) {});
 
 tcpServer.on('connection',function(tcpSocket){
     console.log('num of connections on port 1337: ' + tcpServer.connections);
-    tcpGuests.push(tcpSocket);
+    //also, not needed, we will only have tcp client
+	tcpGuests.push(tcpSocket);
     
+
     tcpSocket.on('data',function(data){
         console.log('received on tcp socket:'+data);
-        
         for (g in webGuests) {
+			//write data directly to the web sockets
             var webSocket = webGuests[g];
             webSocket.send(data.toString('ascii',0,data.length));
             
