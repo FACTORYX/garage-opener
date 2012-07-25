@@ -78,7 +78,23 @@ var connectToMemento = function(timeout) {
          */
         mementoSocket.on('end', function() {
             console.log('lost connection to m3m3n70!');
-            connectToMemento(timeout*2);
+	    mementoSocket = null;
+	    if (timeout > 30000)
+	    {
+		timeout = 50;
+            }
+            else 
+            {
+ 		timeout *=  2;
+            }
+            connectToMemento(timeout);
+        });
+
+        /*
+         * Event: mementoTCP 'error'
+         */
+        mementoSocket.on('error', function(error) {
+            console.log('mementoSocket ERROR!');
         });
 
         /*
@@ -88,9 +104,18 @@ var connectToMemento = function(timeout) {
         mementoSocket.on('close', function(hadError) {
             console.log('m3m3n70 site connection closed!');
             if (hadError) {
-                console.log('m3m3n70 site connection closed because of error: ');
+                //console.log('m3m3n70 site connection closed because of error: ');
             }
-            connectToMemento(timeout*2);
+	    mementoSocket = '';
+	    if (timeout > 30000)
+	    {
+		timeout = 50;
+            }
+            else 
+            {
+ 		timeout *=  2;
+            }
+            connectToMemento(timeout);
         });
     };
 
